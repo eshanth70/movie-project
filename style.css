@@ -1,0 +1,150 @@
+body{
+    margin:0;
+    min-height:100vh;
+    background:#ff819f;
+    padding:30px 0;
+    font-family:Arial, sans-serif;
+    overflow:auto;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    text-align:center;
+    position:relative;
+    z-index:2;
+}
+
+#catImage{
+    width:min(85vw, 380px);
+    border-radius:20px;
+    transition:opacity 0.8s ease;
+}
+
+#question{
+    color:white;
+    margin-top:20px;
+    font-size:2rem;
+}
+
+#message{
+    color:white;
+    font-size:1.3rem;
+    min-height:40px;
+}
+
+#buttonArea{
+    margin-top:20px;
+    position:relative;
+    height:80px;
+}
+
+button{
+    border:none;
+    cursor:pointer;
+    border-radius:14px;
+    padding:15px 25px;
+    font-size:1.1rem;
+    font-weight:bold;
+    transition:all .3s ease;
+}
+
+#yesBtn{
+    background:green;
+    color:white;
+    margin-right:15px;
+}
+
+#noBtn{
+    background:red;
+    color:white;
+    position:absolute;
+}
+
+#movieBtn{
+    margin-top:25px;
+    background:#ffdf4d;
+    color:#222;
+    font-size:1.4rem;
+    padding:18px 35px;
+    box-shadow:0 0 25px rgba(255,255,255,.6);
+    animation:bounce 1s infinite;
+}
+
+.hidden{
+    display:none;
+}
+
+@keyframes bounce{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+}
+
+.heart{
+    position:fixed;
+    bottom:-50px;
+    font-size:25px;
+    animation:floatUp 4s linear forwards;
+}
+
+@keyframes floatUp{
+    from{
+        transform:translateY(0);
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-100vh);
+        opacity:0;
+    }
+}
+
+#ticket{
+    background:white;
+    color:black;
+
+    margin-top:20px;
+
+    padding:20px;
+
+    border-radius:20px;
+
+    width:300px;
+
+    box-shadow:0 0 20px rgba(0,0,0,.2);
+
+    animation:ticketPop .6s ease;
+}
+
+@keyframes ticketPop{
+
+    from{
+        transform:scale(0);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+#credit{
+    position:fixed;
+    bottom:10px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:0.8rem;
+    color:white;
+
+    opacity:0.8;
+}
