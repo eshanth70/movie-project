@@ -38,7 +38,7 @@ body{
 #buttonArea{
     margin-top:20px;
     position:relative;
-    height:80px;
+    height:240px;
 }
 
 button{
@@ -64,7 +64,7 @@ button{
     background: red;
     color: white;
 
-    transition: left 0.12s linear, top 0.12s linear;
+    transition: left 0.08s linear, top 0.08s linear;
     touch-action: none;
 }
 

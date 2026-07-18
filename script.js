@@ -33,25 +33,54 @@ setTimeout(() => {
     }, 500);
 }, 2000);
 
-function moveNoButton() {
+function moveNoButton(mouseX = null, mouseY = null) {
 
     if (!canDodge) return;
 
     canDodge = false;
 
-    const margin = 10;
+    const areaRect = buttonArea.getBoundingClientRect();
+    const btnRect = noBtn.getBoundingClientRect();
 
-    const maxX = buttonArea.clientWidth - noBtn.offsetWidth - margin;
-    const maxY = buttonArea.clientHeight - noBtn.offsetHeight - margin;
+    let newX;
+    let newY;
 
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
+    if (mouseX !== null && mouseY !== null) {
 
-    noBtn.style.left = `${x}px`;
-    noBtn.style.top = `${y}px`;
+        const btnCenterX = btnRect.left + btnRect.width / 2;
+        const btnCenterY = btnRect.top + btnRect.height / 2;
 
-    if (yesSize < 2) {
-        yesSize += 0.03;
+        let dx = btnCenterX - mouseX;
+        let dy = btnCenterY - mouseY;
+
+        const length = Math.hypot(dx, dy) || 1;
+
+        dx /= length;
+        dy /= length;
+
+        const jump = 170;
+
+        newX =
+            (btnRect.left - areaRect.left) + dx * jump;
+
+        newY =
+            (btnRect.top - areaRect.top) + dy * jump;
+
+    } else {
+
+        newX = Math.random() * (buttonArea.clientWidth - noBtn.offsetWidth);
+        newY = Math.random() * (buttonArea.clientHeight - noBtn.offsetHeight);
+
+    }
+
+    newX = Math.max(0, Math.min(newX, buttonArea.clientWidth - noBtn.offsetWidth));
+    newY = Math.max(0, Math.min(newY, buttonArea.clientHeight - noBtn.offsetHeight));
+
+    noBtn.style.left = `${newX}px`;
+    noBtn.style.top = `${newY}px`;
+
+    if (yesSize < 2.3) {
+        yesSize += 0.04;
     }
 
     yesBtn.style.transform = `scale(${yesSize})`;
@@ -61,31 +90,61 @@ function moveNoButton() {
 
     setTimeout(() => {
         canDodge = true;
-    }, 250);
+    }, 120);
+
 }
 
 document.addEventListener("mousemove", (e) => {
 
     const rect = noBtn.getBoundingClientRect();
 
-    const dx = e.clientX - (rect.left + rect.width / 2);
-    const dy = e.clientY - (rect.top + rect.height / 2);
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
 
-    const distance = Math.sqrt(dx * dx + dy * dy);
+    const distance = Math.hypot(
+        e.clientX - centerX,
+        e.clientY - centerY
+    );
 
-    if (distance < 70) {
-        moveNoButton();
+    if (distance < 170) {
+        moveNoButton(e.clientX, e.clientY);
     }
 
 });
-
 noBtn.addEventListener("mouseenter", moveNoButton);
+
+document.addEventListener("touchmove", (e) => {
+
+    const touch = e.touches[0];
+
+    if (!touch) return;
+
+    const rect = noBtn.getBoundingClientRect();
+
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const distance = Math.hypot(
+        touch.clientX - centerX,
+        touch.clientY - centerY
+    );
+
+    if (distance < 170) {
+        moveNoButton(touch.clientX, touch.clientY);
+    }
+
+}, { passive: true });
 
 noBtn.addEventListener("touchstart", (e) => {
 
     e.preventDefault();
 
-    moveNoButton();
+    const touch = e.touches[0];
+
+    moveNoButton(
+        touch.clientX,
+        touch.clientY
+    );
 
 }, { passive: false });
 
