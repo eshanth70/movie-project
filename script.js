@@ -24,6 +24,7 @@ const lines = [
 
 let yesSize = 1;
 let lastLine = -1;
+message.textContent = lines[0];
 
 const messageInterval = setInterval(() => {
 
@@ -125,7 +126,7 @@ document.addEventListener("mousemove", (e) => {
     }
 
 });
-buttonArea.addEventListener(...)
+
 
 document.addEventListener("touchmove", (e) => {
 
