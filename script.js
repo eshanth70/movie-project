@@ -23,6 +23,23 @@ const lines = [
 ];
 
 let yesSize = 1;
+let lastLine = -1;
+
+setInterval(() => {
+
+    let index;
+
+    do {
+
+        index = Math.floor(Math.random() * lines.length);
+
+    } while (index === lastLine);
+
+    lastLine = index;
+
+    message.textContent = lines[index];
+
+}, 1000);
 
 setTimeout(() => {
     catImage.style.opacity = 0;
@@ -84,9 +101,6 @@ function moveNoButton(mouseX = null, mouseY = null) {
     }
 
     yesBtn.style.transform = `scale(${yesSize})`;
-
-    message.textContent =
-        lines[Math.floor(Math.random() * lines.length)];
 
     setTimeout(() => {
         canDodge = true;
