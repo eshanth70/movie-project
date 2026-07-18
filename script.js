@@ -25,6 +25,7 @@ const lines = [
 let yesSize = 1;
 let lastLine = -1;
 message.textContent = lines[0];
+console.log("1");
 
 const messageInterval = setInterval(() => {
 
@@ -43,6 +44,7 @@ const messageInterval = setInterval(() => {
 }, 1000);
 
 setTimeout(() => {
+    console.log("3");
     catImage.style.opacity = 0;
 
     setTimeout(() => {
@@ -108,6 +110,7 @@ function moveNoButton(mouseX = null, mouseY = null) {
     }, 120);
 
 }
+console.log("4");
 
 document.addEventListener("mousemove", (e) => {
 
@@ -129,6 +132,7 @@ document.addEventListener("mousemove", (e) => {
 
 
 document.addEventListener("touchmove", (e) => {
+    console.log("6");
 
     const touch = e.touches[0];
 
@@ -265,3 +269,4 @@ heart.innerHTML =
         }, 4500);
     }
 }
+console.log("7");
