@@ -25,7 +25,7 @@ const lines = [
 let yesSize = 1;
 let lastLine = -1;
 
-setInterval(() => {
+const messageInterval = setInterval(() => {
 
     let index;
 
@@ -125,7 +125,7 @@ document.addEventListener("mousemove", (e) => {
     }
 
 });
-noBtn.addEventListener("mouseenter", moveNoButton);
+buttonArea.addEventListener(...)
 
 document.addEventListener("touchmove", (e) => {
 
@@ -165,6 +165,7 @@ noBtn.addEventListener("touchstart", (e) => {
 
 yesBtn.addEventListener("click", () => {
 
+    clearInterval(messageInterval);
     catImage.src =
         "rigby-cat-hell-yea-rigby-hell-yea.gif";
 
