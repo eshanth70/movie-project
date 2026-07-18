@@ -1,3 +1,4 @@
+let canDodge = true;
 const catImage = document.getElementById("catImage");
 const question = document.getElementById("question");
 const message = document.getElementById("message");
@@ -34,8 +35,14 @@ setTimeout(() => {
 
 function moveNoButton() {
 
-    const maxX = buttonArea.clientWidth - 120;
-    const maxY = buttonArea.clientHeight - 60;
+    if (!canDodge) return;
+
+    canDodge = false;
+
+    const margin = 10;
+
+    const maxX = buttonArea.clientWidth - noBtn.offsetWidth - margin;
+    const maxY = buttonArea.clientHeight - noBtn.offsetHeight - margin;
 
     const x = Math.random() * maxX;
     const y = Math.random() * maxY;
@@ -44,22 +51,46 @@ function moveNoButton() {
     noBtn.style.top = `${y}px`;
 
     if (yesSize < 2) {
-    yesSize += 0.03;
-}
+        yesSize += 0.03;
+    }
 
-    yesBtn.style.transform =
-        `scale(${yesSize})`;
+    yesBtn.style.transform = `scale(${yesSize})`;
 
     message.textContent =
         lines[Math.floor(Math.random() * lines.length)];
+
+    setTimeout(() => {
+        canDodge = true;
+    }, 250);
 }
 
-const dodgeInterval =
-    setInterval(moveNoButton, 1000);
+document.addEventListener("mousemove", (e) => {
+
+    const rect = noBtn.getBoundingClientRect();
+
+    const dx = e.clientX - (rect.left + rect.width / 2);
+    const dy = e.clientY - (rect.top + rect.height / 2);
+
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance < 70) {
+        moveNoButton();
+    }
+
+});
+
+noBtn.addEventListener("mouseenter", moveNoButton);
+
+noBtn.addEventListener("touchstart", (e) => {
+
+    e.preventDefault();
+
+    moveNoButton();
+
+}, { passive: false });
+
 
 yesBtn.addEventListener("click", () => {
-
-    clearInterval(dodgeInterval);
 
     catImage.src =
         "rigby-cat-hell-yea-rigby-hell-yea.gif";

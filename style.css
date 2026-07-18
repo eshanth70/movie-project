@@ -57,10 +57,15 @@ button{
     margin-right:15px;
 }
 
-#noBtn{
-    background:red;
-    color:white;
-    position:absolute;
+#noBtn {
+    position: absolute;
+    width: 120px;
+    height: 50px;
+    background: red;
+    color: white;
+
+    transition: left 0.12s linear, top 0.12s linear;
+    touch-action: none;
 }
 
 #movieBtn{
